@@ -84,9 +84,43 @@
     <div id="cartitems" style="margin:18px 0;color:#eee;font-size:13px"></div>
     <div style="display:flex;justify-content:space-between;border-top:1px solid #54483e;padding-top:14px;color:#ead3b7;font-weight:600"><span>Subtotal</span><span id="carttotal">₹0</span></div>
     <p style="font-size:11px;color:#aaa49d;line-height:1.5">Demo checkout: your order details will be sent to UNIQUE on WhatsApp. Product availability and delivery charges will be confirmed by the shop.</p>
-    <button class="btn" style="width:100%;justify-content:center" onclick="checkoutWhatsApp()">Order on WhatsApp →</button>
+    <button class="btn" style="width:100%;justify-content:center" onclick="openCheckout()">Continue to Checkout →</button>
   </div>
 </div>
+
+<div id="checkoutpanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;align-items:center;justify-content:center;padding:16px">
+  <div style="width:min(540px,100%);max-height:92vh;overflow:auto;background:#191715;border:1px solid #665448;border-radius:12px;padding:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div><div class="eyebrow">UNIQUE MENSWEAR</div><h2 style="font:600 25px 'Playfair Display';color:#ead3b7;margin:4px 0 0">Delivery Details</h2></div>
+      <button type="button" onclick="closeCheckout()" aria-label="Close checkout" style="background:none;border:0;color:white;font-size:25px">×</button>
+    </div>
+    <p style="font-size:11px;color:#aaa49d;line-height:1.5;margin:10px 0 18px">Enter your details so UNIQUE can confirm your order and delivery.</p>
+    <form id="checkoutForm" onsubmit="submitCheckout(event)" style="display:grid;gap:12px">
+      <label style="display:grid;gap:6px;font-size:12px;color:#ead3b7">Full name
+        <input name="customerName" autocomplete="name" required maxlength="80" placeholder="Enter your full name" style="box-sizing:border-box;width:100%;padding:12px;background:#211e1b;border:1px solid #66584c;border-radius:5px;color:#fff">
+      </label>
+      <label style="display:grid;gap:6px;font-size:12px;color:#ead3b7">Mobile number
+        <input name="mobile" type="tel" inputmode="numeric" autocomplete="tel" required pattern="[0-9 +()-]{10,16}" maxlength="16" placeholder="10-digit mobile number" style="box-sizing:border-box;width:100%;padding:12px;background:#211e1b;border:1px solid #66584c;border-radius:5px;color:#fff">
+      </label>
+      <label style="display:grid;gap:6px;font-size:12px;color:#ead3b7">House / building and street address
+        <textarea name="address" autocomplete="street-address" required maxlength="300" rows="3" placeholder="House name/number, street, area" style="box-sizing:border-box;width:100%;padding:12px;background:#211e1b;border:1px solid #66584c;border-radius:5px;color:#fff;resize:vertical"></textarea>
+      </label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <label style="display:grid;gap:6px;font-size:12px;color:#ead3b7">City / District
+          <input name="city" autocomplete="address-level2" required maxlength="80" placeholder="City or district" style="box-sizing:border-box;width:100%;padding:12px;background:#211e1b;border:1px solid #66584c;border-radius:5px;color:#fff">
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:#ead3b7">PIN code
+          <input name="pincode" inputmode="numeric" autocomplete="postal-code" required pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN" style="box-sizing:border-box;width:100%;padding:12px;background:#211e1b;border:1px solid #66584c;border-radius:5px;color:#fff">
+        </label>
+      </div>
+      <div style="border-top:1px solid #54483e;padding-top:12px;display:flex;justify-content:space-between;color:#ead3b7;font-weight:600"><span>Order subtotal</span><span id="checkouttotal">₹0</span></div>
+      <p style="font-size:11px;color:#aaa49d;line-height:1.5;margin:0">Delivery charges, product availability and payment method will be confirmed by UNIQUE on WhatsApp. No payment is collected on this website.</p>
+      <button class="btn" type="submit" style="width:100%;justify-content:center">Send Order on WhatsApp →</button>
+      <button type="button" onclick="closeCheckout()" style="background:none;border:1px solid #66584c;color:#ead3b7;border-radius:5px;padding:11px">Back to Bag</button>
+    </form>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <script>
 const SHOP_WHATSAPP = "916235355544";
@@ -143,11 +177,31 @@ function showCart(){
 }
 function closeCart(){document.getElementById("cartpanel").style.display="none"}
 function removeCart(i){cartItems.splice(i,1);saveCart();showCart()}
-function checkoutWhatsApp(){
+function openCheckout(){
   if(!cartItems.length){toast("Your bag is empty");return}
+  const total=cartItems.reduce((s,p)=>s+p.price*p.qty,0);
+  document.getElementById("checkouttotal").textContent="₹"+total.toLocaleString("en-IN");
+  closeCart();
+  document.getElementById("checkoutpanel").style.display="flex";
+}
+function closeCheckout(){document.getElementById("checkoutpanel").style.display="none"}
+function submitCheckout(event){
+  event.preventDefault();
+  if(!cartItems.length){toast("Your bag is empty");closeCheckout();return}
+  const form=document.getElementById("checkoutForm");
+  if(!form.reportValidity())return;
+  const data=new FormData(form);
+  const name=String(data.get("customerName")).trim();
+  const mobile=String(data.get("mobile")).trim();
+  const address=String(data.get("address")).trim();
+  const city=String(data.get("city")).trim();
+  const pincode=String(data.get("pincode")).trim();
+  if(!name||!address||!city||!/^[0-9]{6}$/.test(pincode)||mobile.replace(/\D/g,"").length<10){
+    toast("Please check your delivery details");return;
+  }
   const lines=cartItems.map(p=>`${p.name}${p.color ? " — Colour: "+p.color : ""}${p.size ? " — Size: "+p.size : ""} — Qty ${p.qty} — ₹${(p.price*p.qty).toLocaleString("en-IN")}`).join("\n");
   const total=cartItems.reduce((s,p)=>s+p.price*p.qty,0);
-  const msg=`Hello UNIQUE Menswear, I would like to place an order:\n\n${lines}\n\nSubtotal: ₹${total.toLocaleString("en-IN")}\n\nPlease confirm availability, sizes, delivery charges and payment details.`;
+  const msg=`Hello UNIQUE Menswear, I would like to place an order:\n\nCustomer: ${name}\nMobile: ${mobile}\nDelivery address: ${address}, ${city} - ${pincode}\n\nOrder items:\n${lines}\n\nSubtotal: ₹${total.toLocaleString("en-IN")}\nDelivery charges: Please confirm\nPayment: Please share available payment options.`;
   window.open("https://wa.me/"+SHOP_WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
 }
 function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
