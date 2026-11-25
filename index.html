@@ -61,12 +61,7 @@ footer{padding:35px 5% 20px;display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr
 <input id="search" placeholder="Search products…" style="width:100%;max-width:300px;margin:0 0 16px;padding:10px 12px;background:#1b1917;border:1px solid #4c4036;color:white;border-radius:5px" oninput="searchProducts(this.value)">
 <div class="products" id="products">
 <article class="product" data-type="Men" data-name="Premium Linen Shirt"><div class="photo"><img id="linenProductImage" src="linen-brown.jpg" alt="UNIQUE Premium Linen Shirt in Brown"><span class="tag">SPECIAL OFFER</span><button class="heart" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button></div><div class="pinfo"><h3>Premium Linen Shirt</h3><span class="price">₹660</span><div class="variant-row"><select class="product-color" aria-label="Choose colour" onchange="changeLinenColor(this)"><option value="Brown">Brown</option><option value="Purple">Purple</option><option value="Pink">Pink</option></select><select class="product-size" aria-label="Choose size"><option value="">Choose size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div><button class="add" onclick="addCart(this)">ADD +</button><small style="display:block;color:#b7aaa0;margin-top:8px">Sizes: S · M · L · XL · XXL · Stock: 20 each in Brown, Purple and Pink</small><button class="details-link" type="button" onclick="openProductDetails()">View product details →</button></div></article>
-<article class="product" data-type="Men" data-name="Sneakers">
-  <div class="photo"><img src="sneakers-offer.jpg" alt="White, black and red sneakers from UNIQUE Menswear" loading="lazy"><span class="tag">25% OFF</span><button class="heart" aria-label="Add sneakers to wishlist" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button></div>
-  <div class="pinfo"><h3>Sneakers</h3><span class="price">₹1,200</span><span class="old">₹1,600</span>
-    <small style="display:block;color:#b7aaa0;margin-top:8px">Contact us to confirm available sizes and stock</small>
-    <button class="details-link" type="button" onclick="enquireProduct('Sneakers',1200)">Enquire on WhatsApp →</button>
-  </div>
+
 </article>
 <article class="product" data-type="Men" data-name="Chelsea Boots">
   <div class="photo"><img src="chelsea-boots.jpg" alt="Brown and black Chelsea boots" loading="lazy"><span class="tag">NEW</span><button class="heart" aria-label="Add Chelsea Boots to wishlist" onclick="this.textContent=this.textContent==='♡'?'♥':'♡'">♡</button></div>
