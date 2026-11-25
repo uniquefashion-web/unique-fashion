@@ -1,0 +1,29 @@
+UNIQUE Menswear — Product Catalogue Update
+
+This package updates the existing homepage product section and adds the supplied product images.
+
+Included:
+- index.html (updated existing website source)
+- sneakers-offer.jpg
+- chelsea-boots.jpg
+- new-balance-9060.jpg
+
+Products added:
+1. Sneakers — ₹1,200 (advertised offer price; size and stock not supplied, so card uses WhatsApp enquiry)
+2. Chelsea Boots — ₹800; Brown/Black; sizes 40–45; stock recorded as 2 pairs per colour (4 total)
+3. New Balance 9060 Mushroom — ₹3,000; sizes 41–45; stock 8 pairs; free shipping
+
+Existing Premium Linen Shirt remains on the website at ₹660, with Brown/Purple/Pink and S–XXL. Stock text reflects 20 per colour (60 total).
+
+Upload:
+1. Open https://github.com/uniquefashion-web/unique-fashion
+2. In branch main, upload/replace index.html.
+3. Upload the three new JPG image files to the repository root.
+4. Commit changes.
+5. Keep all existing files, including admin.html, existing linen images, Firebase-related files, and the Google verification HTML file.
+
+Important:
+- This package does not deploy to GitHub automatically.
+- The source file supplied in this conversation is the homepage version edited here.
+- Product quantities are shown as catalogue information; this update does not add live Firebase inventory validation or automatic stock deduction.
+- Sneakers sizes/stock were not supplied, so the card directs customers to WhatsApp to confirm availability.
