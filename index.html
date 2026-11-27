@@ -4,240 +4,332 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UNIQUE FASHION - Discover premium men's fashion. All India delivery.">
 <title>UNIQUE FASHION | You're Unique, Wear Unique</title>
-<meta name="description" content="Discover premium men's fashion at UNIQUE FASHION. Shirts, T-shirts, jeans, pants and footwear. All India delivery.">
+
 <style>
 :root {
   --black:#111111;
   --white:#ffffff;
   --beige:#D8C3A5;
-  --muted:#777;
-  --bg:#f8f7f4;
+  --cream:#F6F3EE;
+  --grey:#777777;
 }
 * {box-sizing:border-box;margin:0;padding:0}
-body {font-family:Arial,sans-serif;background:var(--white);color:var(--black)}
-button,input,select,textarea {font:inherit}
+html {scroll-behavior:smooth}
+body {font-family:Arial,sans-serif;color:var(--black);background:white}
+button,input,textarea,select {font:inherit}
 button {cursor:pointer}
-a {color:inherit;text-decoration:none}
-.topbar {background:var(--black);color:white;text-align:center;padding:9px;font-size:11px;letter-spacing:2px}
-header {height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:10}
-.brand {display:flex;align-items:center;gap:10px}
-.brand img {width:55px;height:55px;object-fit:contain}
-.brand-name {font-family:Georgia,serif;font-size:19px;letter-spacing:2px}
-.brand-tag {font-size:8px;letter-spacing:2px;color:#777;margin-top:5px}
-nav {display:flex;gap:25px;font-size:12px;letter-spacing:1px}
+a {text-decoration:none;color:inherit}
+
+.announcement {
+  background:var(--black);color:white;text-align:center;
+  padding:10px;font-size:10px;letter-spacing:2px
+}
+header {
+  height:82px;padding:0 6%;display:flex;align-items:center;
+  justify-content:space-between;background:white;
+  position:sticky;top:0;z-index:20;border-bottom:1px solid #eee
+}
+.brand {display:flex;align-items:center;gap:12px}
+.brand img {width:52px;height:52px;object-fit:contain}
+.brand-name {font-family:Georgia,serif;font-size:21px;letter-spacing:2px}
+.tagline {font-size:8px;letter-spacing:2px;color:#777;margin-top:5px}
+nav {display:flex;align-items:center;gap:25px}
+nav a {font-size:11px;letter-spacing:1px}
 nav a:hover {color:#a58b65}
-.cart-button {border:1px solid #ddd;background:white;padding:10px 15px;font-size:12px}
-.hero {min-height:490px;background:linear-gradient(90deg,rgba(0,0,0,.76),rgba(0,0,0,.12)),url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=1800') center/cover;display:flex;align-items:center;padding:7%;color:white}
-.hero-content {max-width:510px}
-.eyebrow {letter-spacing:4px;font-size:11px;color:var(--beige)}
-.hero h1 {font-family:Georgia,serif;font-size:clamp(40px,6vw,70px);font-weight:400;margin:20px 0;line-height:1.08}
-.hero p {font-size:14px;line-height:1.8;color:#eee}
-.primary-btn {display:inline-block;background:var(--beige);color:#111;border:0;padding:15px 25px;margin-top:27px;font-size:11px;letter-spacing:2px;font-weight:bold}
-.section {padding:65px 6%}
-.section-heading {text-align:center;margin-bottom:35px}
-.section-heading small {color:#9b805a;letter-spacing:3px;font-size:10px}
-.section-heading h2 {font-family:Georgia,serif;font-size:34px;font-weight:400;margin-top:10px}
-.categories {display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.category {height:180px;position:relative;overflow:hidden;background:#222}
-.category img {width:100%;height:100%;object-fit:cover;opacity:.75;transition:.3s}
-.category:hover img {transform:scale(1.05)}
-.category span {position:absolute;bottom:20px;left:18px;color:white;font-size:15px;letter-spacing:2px}
-.filters {display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:30px}
-.filter {padding:10px 17px;border:1px solid #ddd;background:white;font-size:11px}
+.header-actions {display:flex;gap:10px}
+.header-btn {padding:12px 15px;border:1px solid #ddd;background:white;font-size:11px}
+
+.hero {
+  min-height:570px;display:flex;align-items:center;
+  background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.1)),
+  url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=1800') center/cover;
+  color:white;padding:7%
+}
+.hero-content {max-width:570px}
+.eyebrow {font-size:11px;letter-spacing:4px;color:var(--beige)}
+.hero h1 {font-family:Georgia,serif;font-weight:400;font-size:clamp(45px,7vw,78px);line-height:1.05;margin:23px 0}
+.hero p {font-size:14px;line-height:1.9;color:#eee;max-width:450px}
+.primary-btn {
+  display:inline-block;background:var(--beige);color:#111;
+  padding:16px 27px;margin-top:28px;font-size:11px;
+  font-weight:bold;letter-spacing:2px;border:0
+}
+.primary-btn:hover {background:white}
+
+.section {padding:75px 6%}
+.heading {text-align:center;margin-bottom:38px}
+.heading small {font-size:10px;letter-spacing:3px;color:#a58b65}
+.heading h2 {font-family:Georgia,serif;font-size:37px;font-weight:400;margin-top:12px}
+
+.categories {display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.category {height:260px;position:relative;overflow:hidden;background:#222}
+.category img {width:100%;height:100%;object-fit:cover;opacity:.78;transition:.4s}
+.category:hover img {transform:scale(1.07)}
+.category span {
+ position:absolute;bottom:20px;left:18px;color:white;
+ font-size:14px;letter-spacing:2px;font-weight:bold
+}
+
+.shop-section {background:var(--cream)}
+.filters {display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:35px}
+.filter {background:white;border:1px solid #ddd;padding:11px 18px;font-size:10px;letter-spacing:1px}
 .filter.active,.filter:hover {background:#111;color:white;border-color:#111}
-.products {display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
-.product-card {min-width:0}
-.product-image {height:290px;background:#f2f0ec;position:relative;overflow:hidden}
+
+.products {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px}
+.product-card {min-width:0;background:white}
+.product-image {height:290px;background:#eee;overflow:hidden;position:relative}
 .product-image img {width:100%;height:100%;object-fit:cover;transition:.4s}
-.product-card:hover .product-image img {transform:scale(1.04)}
-.product-info {padding:14px 0}
-.product-category {font-size:9px;color:#888;letter-spacing:2px}
-.product-name {font-size:14px;margin:8px 0}
-.product-price {font-size:14px;font-weight:bold}
-.product-controls {display:flex;gap:8px;margin-top:12px}
-.product-controls select {min-width:0;width:38%;padding:9px;border:1px solid #ddd;background:white;font-size:11px}
-.add-btn {flex:1;background:#111;color:white;border:0;padding:10px 5px;font-size:10px;letter-spacing:1px}
-.add-btn:hover {background:#9b805a}
-.features {background:var(--bg);display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:25px;padding:38px 6%}
-.features h3 {font-family:Georgia,serif;font-size:19px;font-weight:400;margin-bottom:8px}
-.features p {font-size:11px;color:#777}
-.about {background:#111;color:white;text-align:center}
-.about p {max-width:650px;margin:18px auto 0;color:#ccc;line-height:1.9;font-size:13px}
-.contact {text-align:center}
-.contact p {font-size:13px;line-height:2;color:#666}
-footer {background:#111;color:#ddd;text-align:center;padding:35px 15px;font-size:11px;line-height:2}
-footer strong {color:var(--beige);letter-spacing:3px}
-.overlay {display:none;position:fixed;inset:0;background:#0008;z-index:30}
+.product-card:hover img {transform:scale(1.04)}
+.product-info {padding:16px}
+.product-category {font-size:9px;color:#999;letter-spacing:2px}
+.product-name {font-size:14px;margin:10px 0}
+.product-price {font-weight:bold;font-size:15px}
+.product-controls {display:flex;gap:7px;margin-top:14px}
+.product-controls select {width:42%;min-width:0;padding:10px;border:1px solid #ddd;background:white;font-size:11px}
+.add-btn {flex:1;background:#111;color:white;border:0;font-size:10px;letter-spacing:1px}
+.add-btn:hover {background:#a58b65}
+
+.promo {
+ background:#111;color:white;text-align:center;padding:65px 20px
+}
+.promo h2 {font-family:Georgia,serif;font-size:35px;font-weight:400;margin:15px 0}
+.promo p {color:#ccc;font-size:13px;line-height:1.8}
+
+.benefits {
+ background:var(--cream);display:grid;grid-template-columns:repeat(3,1fr);
+ gap:25px;padding:45px 6%;text-align:center
+}
+.benefits h3 {font-family:Georgia,serif;font-weight:400;font-size:21px;margin-bottom:10px}
+.benefits p {font-size:11px;color:#777;line-height:1.7}
+
+.about {text-align:center}
+.about p {max-width:700px;margin:auto;color:#666;font-size:13px;line-height:2}
+
+.contact {background:var(--cream);text-align:center}
+.contact p {font-size:13px;line-height:2;color:#555}
+
+footer {background:#111;color:#ddd;text-align:center;padding:40px 15px;line-height:2;font-size:11px}
+footer strong {font-family:Georgia,serif;font-size:20px;letter-spacing:3px;color:var(--beige)}
+
+.overlay {display:none;position:fixed;inset:0;background:#0008;z-index:50}
 .overlay.show {display:block}
-.drawer {position:absolute;right:0;top:0;height:100%;width:min(450px,100%);background:white;padding:25px;overflow-y:auto}
-.drawer-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.close {border:0;background:none;font-size:25px}
-.cart-item {display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid #eee;font-size:12px}
-.cart-item button {border:0;background:none;color:#a33}
+.drawer {
+ position:absolute;right:0;top:0;width:min(450px,100%);
+ height:100%;background:white;padding:25px;overflow-y:auto
+}
+.drawer-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.drawer-head h2 {font-family:Georgia,serif;font-weight:400}
+.close {background:none;border:0;font-size:27px}
+.cart-item {display:flex;justify-content:space-between;gap:10px;padding:15px 0;border-bottom:1px solid #eee;font-size:12px}
+.remove {border:0;background:none;color:#a33;font-size:11px}
 .cart-total {display:flex;justify-content:space-between;padding:20px 0;font-weight:bold}
-.checkout-form {display:grid;gap:12px;margin-top:10px}
-.checkout-form input,.checkout-form textarea {width:100%;padding:12px;border:1px solid #ddd;font-size:12px}
-.checkout-btn {width:100%;padding:15px;background:#111;color:white;border:0;font-size:12px;letter-spacing:1px}
-.empty {padding:25px 0;color:#888;font-size:13px}
-@media(max-width:850px) {
- .products {grid-template-columns:repeat(2,1fr);gap:16px}
- .product-image {height:260px}
+.checkout-form {display:grid;gap:12px;margin-top:12px}
+.checkout-form input,.checkout-form textarea {
+ padding:13px;width:100%;border:1px solid #ddd;font-size:12px
+}
+.checkout-btn {background:#111;color:white;border:0;padding:15px;font-size:11px;letter-spacing:1px}
+.empty {padding:25px 0;color:#777;font-size:13px}
+
+@media(max-width:900px) {
+ .products {grid-template-columns:repeat(2,minmax(0,1fr))}
  .categories {grid-template-columns:repeat(2,1fr)}
  nav {gap:12px}
 }
-@media(max-width:560px) {
- header {height:65px;padding:0 4%}
- .brand img {width:42px;height:42px}
+@media(max-width:600px) {
+ header {height:68px;padding:0 4%}
+ .brand img {width:40px;height:40px}
  .brand-name {font-size:15px}
- .brand-tag {font-size:7px}
+ .tagline {font-size:7px}
  nav {display:none}
- .hero {min-height:440px;background-position:60% center;padding:8% 6%}
- .hero h1 {font-size:43px}
- .section {padding:48px 5%}
- .products {gap:13px}
- .product-image {height:210px}
+ .header-btn {padding:10px;font-size:10px}
+ .hero {min-height:470px;padding:8% 6%;background-position:60% center}
+ .hero h1 {font-size:48px}
+ .section {padding:52px 5%}
+ .heading h2 {font-size:30px}
+ .category {height:190px}
+ .product-image {height:220px}
+ .product-info {padding:11px}
  .product-name {font-size:12px}
  .product-controls {flex-direction:column}
  .product-controls select {width:100%}
- .add-btn {padding:11px}
- .features {grid-template-columns:1fr;gap:25px}
+ .add-btn {padding:12px}
+ .benefits {grid-template-columns:1fr;gap:28px}
 }
 </style>
 </head>
+
 <body>
 
-<div class="topbar">PREMIUM MEN'S FASHION · ALL INDIA DELIVERY</div>
+<div class="announcement">
+ PREMIUM MEN'S FASHION &nbsp; | &nbsp; ALL INDIA DELIVERY
+</div>
 
 <header>
-  <a href="#" class="brand">
-    <img src="logo.png" alt="UNIQUE FASHION logo"
-         onerror="this.style.display='none'">
-    <div>
-      <div class="brand-name">UNIQUE FASHION</div>
-      <div class="brand-tag">YOU'RE UNIQUE, WEAR UNIQUE</div>
-    </div>
-  </a>
-  <nav>
-    <a href="#home">HOME</a>
-    <a href="#categories">CATEGORIES</a>
-    <a href="#shop">SHOP</a>
-    <a href="#about">ABOUT</a>
-    <a href="#contact">CONTACT</a>
-  </nav>
-  <button class="cart-button" onclick="openCart()">
-    BAG (<span id="cart-count">0</span>)
+ <a href="#home" class="brand">
+  <img src="logo.png" alt="UNIQUE FASHION Logo"
+       onerror="this.style.display='none'">
+  <div>
+   <div class="brand-name">UNIQUE FASHION</div>
+   <div class="tagline">YOU'RE UNIQUE, WEAR UNIQUE</div>
+  </div>
+ </a>
+
+ <nav>
+  <a href="#home">HOME</a>
+  <a href="#categories">CATEGORIES</a>
+  <a href="#shop">SHOP</a>
+  <a href="#about">ABOUT</a>
+  <a href="#contact">CONTACT</a>
+ </nav>
+
+ <div class="header-actions">
+  <button class="header-btn" onclick="openCart()">
+   BAG (<span id="cart-count">0</span>)
   </button>
+ </div>
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="eyebrow">THE NEW MEN'S COLLECTION</div>
-    <h1>Style That<br>Defines You.</h1>
-    <p>Discover your style with our latest collection of premium men's fashion.</p>
-    <a class="primary-btn" href="#shop">EXPLORE COLLECTION</a>
-  </div>
+ <div class="hero-content">
+  <div class="eyebrow">THE NEW COLLECTION</div>
+  <h1>Fashion That<br>Defines You.</h1>
+  <p>Discover modern styles, premium collections and everyday fashion. Find your style. Make it unique.</p>
+  <a class="primary-btn" href="#shop">SHOP COLLECTION</a>
+ </div>
 </section>
 
 <section class="section" id="categories">
-  <div class="section-heading">
-    <small>EXPLORE OUR COLLECTION</small>
-    <h2>Shop By Category</h2>
-  </div>
-  <div class="categories">
-    <a class="category" href="#shop" onclick="filterProducts('Shirts')">
-      <img src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?w=600" alt="Shirts">
-      <span>SHIRTS</span>
-    </a>
-    <a class="category" href="#shop" onclick="filterProducts('T-Shirts')">
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" alt="T-shirts">
-      <span>T-SHIRTS</span>
-    </a>
-    <a class="category" href="#shop" onclick="filterProducts('Jeans & Pants')">
-      <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600" alt="Jeans">
-      <span>JEANS & PANTS</span>
-    </a>
-    <a class="category" href="#shop" onclick="filterProducts('Footwear')">
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" alt="Footwear">
-      <span>FOOTWEAR</span>
-    </a>
-  </div>
+ <div class="heading">
+  <small>DISCOVER YOUR STYLE</small>
+  <h2>Shop By Category</h2>
+ </div>
+
+ <div class="categories">
+  <a class="category" href="#shop" onclick="filterProducts('Shirts')">
+   <img src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?w=700" alt="Men's shirts">
+   <span>SHIRTS</span>
+  </a>
+  <a class="category" href="#shop" onclick="filterProducts('T-Shirts')">
+   <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="Men's T-shirts">
+   <span>T-SHIRTS</span>
+  </a>
+  <a class="category" href="#shop" onclick="filterProducts('Jeans & Pants')">
+   <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
+   <span>JEANS & PANTS</span>
+  </a>
+  <a class="category" href="#shop" onclick="filterProducts('Footwear')">
+   <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Footwear">
+   <span>FOOTWEAR</span>
+  </a>
+ </div>
 </section>
 
-<section class="section" id="shop">
-  <div class="section-heading">
-    <small>CURATED FOR YOUR STYLE</small>
-    <h2>Our Collection</h2>
-  </div>
-  <div class="filters">
-    <button class="filter active" onclick="filterProducts('All',this)">ALL</button>
-    <button class="filter" onclick="filterProducts('Shirts',this)">SHIRTS</button>
-    <button class="filter" onclick="filterProducts('T-Shirts',this)">T-SHIRTS</button>
-    <button class="filter" onclick="filterProducts('Jeans & Pants',this)">JEANS & PANTS</button>
-    <button class="filter" onclick="filterProducts('Footwear',this)">FOOTWEAR</button>
-  </div>
-  <div class="products" id="product-list"></div>
+<section class="section shop-section" id="shop">
+ <div class="heading">
+  <small>SELECTED FOR YOU</small>
+  <h2>Our Collection</h2>
+ </div>
+
+ <div class="filters">
+  <button class="filter active" onclick="filterProducts('All',this)">ALL</button>
+  <button class="filter" onclick="filterProducts('Shirts',this)">SHIRTS</button>
+  <button class="filter" onclick="filterProducts('T-Shirts',this)">T-SHIRTS</button>
+  <button class="filter" onclick="filterProducts('Jeans & Pants',this)">JEANS & PANTS</button>
+  <button class="filter" onclick="filterProducts('Footwear',this)">FOOTWEAR</button>
+ </div>
+
+ <div class="products" id="product-list"></div>
 </section>
 
-<section class="features">
-  <div><h3>Premium Style</h3><p>Selected styles for everyday confidence.</p></div>
-  <div><h3>All India Delivery</h3><p>We deliver your orders across India.</p></div>
-  <div><h3>Easy Ordering</h3><p>Place your order directly through WhatsApp.</p></div>
+<section class="promo">
+ <div class="eyebrow">YOUR STYLE. YOUR IDENTITY.</div>
+ <h2>You're Unique, Wear Unique.</h2>
+ <p>Explore the latest fashion collection at UNIQUE FASHION.<br>
+ Quality styles for everyday confidence.</p>
+ <a href="#shop" class="primary-btn">EXPLORE NOW</a>
+</section>
+
+<section class="benefits">
+ <div>
+  <h3>Premium Fashion</h3>
+  <p>Modern styles for everyday wear.</p>
+ </div>
+ <div>
+  <h3>All India Delivery</h3>
+  <p>We deliver across India.</p>
+ </div>
+ <div>
+  <h3>Easy Ordering</h3>
+  <p>Order directly through WhatsApp.</p>
+ </div>
 </section>
 
 <section class="section about" id="about">
-  <div class="section-heading">
-    <small>OUR IDENTITY</small>
-    <h2>You're Unique, Wear Unique</h2>
-  </div>
-  <p>UNIQUE FASHION brings together modern fashion, everyday comfort and personal style. Explore our collection of shirts, T-shirts, jeans, pants and footwear. Find your style and make it unique.</p>
+ <div class="heading">
+  <small>OUR STORY</small>
+  <h2>About UNIQUE FASHION</h2>
+ </div>
+ <p>
+  UNIQUE FASHION brings together modern fashion, everyday comfort
+  and personal style. Discover our collection of shirts, T-shirts,
+  jeans, pants and footwear. Our goal is to make your everyday style unique.
+ </p>
 </section>
 
 <section class="section contact" id="contact">
-  <div class="section-heading">
-    <small>VISIT OUR STORE</small>
-    <h2>Contact Us</h2>
-  </div>
-  <p>UNIQUE FASHION<br>
+ <div class="heading">
+  <small>WE ARE HERE FOR YOU</small>
+  <h2>Visit Our Store</h2>
+ </div>
+ <p>
+  UNIQUE FASHION<br>
   Ulloor, Thiruvananthapuram, Kerala<br>
-  Enquiries: +91 6235 355 544<br>
-  All India Delivery Available</p>
-  <a class="primary-btn" href="https://wa.me/916235355544">CONTACT ON WHATSAPP</a>
+  Enquiry: +91 6235 355 544<br>
+  All India Delivery Available
+ </p>
+ <a class="primary-btn" href="https://wa.me/916235355544">
+  CONTACT ON WHATSAPP
+ </a>
 </section>
 
 <footer>
-  <strong>UNIQUE FASHION</strong><br>
-  YOU'RE UNIQUE, WEAR UNIQUE<br>
-  Ulloor, Thiruvananthapuram<br>
-  © 2026 UNIQUE FASHION. All Rights Reserved.
+ <strong>UNIQUE FASHION</strong><br>
+ YOU'RE UNIQUE, WEAR UNIQUE<br>
+ Ulloor, Thiruvananthapuram, Kerala<br>
+ © 2026 UNIQUE FASHION. All Rights Reserved.
 </footer>
 
 <div class="overlay" id="cart-overlay" onclick="outsideClose(event)">
-  <div class="drawer">
-    <div class="drawer-head">
-      <h2 style="font-family:Georgia">Your Shopping Bag</h2>
-      <button class="close" onclick="closeCart()">×</button>
-    </div>
-    <div id="cart-items"></div>
-    <div class="cart-total">
-      <span>Total</span><span id="cart-total">₹0</span>
-    </div>
-    <p style="font-size:11px;color:#777;margin-bottom:15px">
-      No online payment. Confirm your order through WhatsApp.
-    </p>
-    <form class="checkout-form" onsubmit="checkout(event)">
-      <input id="customer-name" placeholder="Your full name" required>
-      <input id="customer-phone" placeholder="Phone number" type="tel" required>
-      <textarea id="customer-address" placeholder="Full delivery address" rows="3" required></textarea>
-      <button class="checkout-btn" type="submit">PLACE ORDER ON WHATSAPP</button>
-    </form>
+ <div class="drawer">
+  <div class="drawer-head">
+   <h2>Your Shopping Bag</h2>
+   <button class="close" onclick="closeCart()">×</button>
   </div>
+
+  <div id="cart-items"></div>
+
+  <div class="cart-total">
+   <span>Total</span>
+   <span id="cart-total">₹0</span>
+  </div>
+
+  <p style="font-size:11px;color:#777;line-height:1.7">
+   No online payment. Your order will be sent to our WhatsApp for confirmation.
+  </p>
+
+  <form class="checkout-form" onsubmit="checkout(event)">
+   <input id="customer-name" placeholder="Full name" required>
+   <input id="customer-phone" placeholder="Mobile number" type="tel" required>
+   <textarea id="customer-address" placeholder="Complete delivery address" rows="3" required></textarea>
+   <button type="submit" class="checkout-btn">PLACE ORDER ON WHATSAPP</button>
+  </form>
+ </div>
 </div>
 
 <script>
-// EDIT YOUR PRODUCTS HERE.
-// Prices and images below are sample entries.
-// Replace them with your actual products and prices.
+// SAMPLE PRODUCTS: Replace these with your real products and prices.
 
 const products = [
  {id:1,name:"Premium Casual Shirt",category:"Shirts",price:599,image:"https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?w=700",sizes:["S","M","L","XL","XXL"]},
@@ -245,19 +337,20 @@ const products = [
  {id:3,name:"Essential Cotton T-Shirt",category:"T-Shirts",price:399,image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700",sizes:["S","M","L","XL","XXL"]},
  {id:4,name:"Premium Black T-Shirt",category:"T-Shirts",price:499,image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700",sizes:["S","M","L","XL","XXL"]},
  {id:5,name:"Baggy Fit Jeans",category:"Jeans & Pants",price:899,image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700",sizes:["28","30","32","34","36"]},
- {id:6,name:"Classic Casual Sneakers",category:"Footwear",price:1299,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700",sizes:["40","41","42","43","44","45"]}
+ {id:6,name:"Casual Sneakers",category:"Footwear",price:1299,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700",sizes:["40","41","42","43","44","45"]}
 ];
 
-let cart = [];
-let activeFilter = "All";
+let cart=[];
+let activeFilter="All";
 
-function renderProducts() {
- const list = document.getElementById("product-list");
- const filtered = activeFilter === "All"
-   ? products : products.filter(p=>p.category===activeFilter);
+function renderProducts(){
+ const list=document.getElementById("product-list");
+ const filtered=activeFilter==="All"
+  ? products
+  : products.filter(p=>p.category===activeFilter);
 
- list.innerHTML = filtered.map(p=>`
-  <div class="product-card">
+ list.innerHTML=filtered.map(p=>`
+  <article class="product-card">
    <div class="product-image">
     <img src="${p.image}" alt="${p.name}" loading="lazy">
    </div>
@@ -266,75 +359,96 @@ function renderProducts() {
     <div class="product-name">${p.name}</div>
     <div class="product-price">₹${p.price.toLocaleString("en-IN")}</div>
     <div class="product-controls">
-     <select id="size-${p.id}" aria-label="Choose size">
+     <select id="size-${p.id}" aria-label="Select size">
       ${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join("")}
      </select>
      <button class="add-btn" onclick="addToCart(${p.id})">ADD TO BAG</button>
     </div>
    </div>
-  </div>
+  </article>
  `).join("");
 }
 
-function filterProducts(category,button) {
+function filterProducts(category,button){
  activeFilter=category;
  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
- if(button) button.classList.add("active");
- else {
-  const matching=[...document.querySelectorAll(".filter")].find(b=>b.textContent.trim().toLowerCase()===category.toLowerCase());
-  if(matching) matching.classList.add("active");
+
+ if(button){
+  button.classList.add("active");
+ } else {
+  const match=[...document.querySelectorAll(".filter")]
+   .find(b=>b.textContent.trim().toLowerCase()===category.toLowerCase());
+  if(match) match.classList.add("active");
  }
+
  renderProducts();
 }
 
-function addToCart(id) {
+function addToCart(id){
  const product=products.find(p=>p.id===id);
  const size=document.getElementById("size-"+id).value;
  const existing=cart.find(i=>i.id===id&&i.size===size);
+
  if(existing) existing.qty++;
  else cart.push({...product,size,qty:1});
+
  updateCart();
+ openCart();
 }
 
-function updateCart() {
- document.getElementById("cart-count").textContent=cart.reduce((s,i)=>s+i.qty,0);
- document.getElementById("cart-total").textContent="₹"+cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString("en-IN");
+function updateCart(){
+ document.getElementById("cart-count").textContent=
+  cart.reduce((s,i)=>s+i.qty,0);
+
+ const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+ document.getElementById("cart-total").textContent=
+  "₹"+total.toLocaleString("en-IN");
 
  const container=document.getElementById("cart-items");
- if(!cart.length) {
+
+ if(!cart.length){
   container.innerHTML='<div class="empty">Your shopping bag is empty.</div>';
   return;
  }
+
  container.innerHTML=cart.map(i=>`
   <div class="cart-item">
-   <div><strong>${i.name}</strong><br>Size: ${i.size} · Qty: ${i.qty}<br>₹${(i.price*i.qty).toLocaleString("en-IN")}</div>
-   <button onclick="removeItem(${i.id},'${i.size}')">REMOVE</button>
+   <div>
+    <strong>${i.name}</strong><br>
+    Size: ${i.size} · Quantity: ${i.qty}<br>
+    ₹${(i.price*i.qty).toLocaleString("en-IN")}
+   </div>
+   <button class="remove" onclick="removeItem(${i.id},'${i.size}')">REMOVE</button>
   </div>
  `).join("");
 }
 
-function removeItem(id,size) {
+function removeItem(id,size){
  cart=cart.filter(i=>!(i.id===id&&i.size===size));
  updateCart();
 }
 
-function openCart() {
+function openCart(){
  document.getElementById("cart-overlay").classList.add("show");
  updateCart();
 }
-function closeCart() {
+
+function closeCart(){
  document.getElementById("cart-overlay").classList.remove("show");
 }
-function outsideClose(e) {
+
+function outsideClose(e){
  if(e.target.id==="cart-overlay") closeCart();
 }
 
-function checkout(e) {
+function checkout(e){
  e.preventDefault();
- if(!cart.length) {
+
+ if(!cart.length){
   alert("Your shopping bag is empty.");
   return;
  }
+
  const name=document.getElementById("customer-name").value.trim();
  const phone=document.getElementById("customer-phone").value.trim();
  const address=document.getElementById("customer-address").value.trim();
@@ -344,13 +458,22 @@ function checkout(e) {
  ).join("\n");
 
  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
- const message=`NEW ORDER - UNIQUE FASHION\n\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nORDER DETAILS:\n${items}\n\nTotal: ₹${total}\n\nPlease confirm availability and delivery details.`;
 
- window.open("https://wa.me/916235355544?text="+encodeURIComponent(message),"_blank");
+ const message=
+ `NEW ORDER - UNIQUE FASHION\n\n`+
+ `Customer: ${name}\nPhone: ${phone}\nAddress: ${address}\n\n`+
+ `ORDER DETAILS:\n${items}\n\nTotal: ₹${total}\n\n`+
+ `Please confirm availability and delivery details.`;
+
+ window.open(
+  "https://wa.me/916235355544?text="+encodeURIComponent(message),
+  "_blank"
+ );
 }
 
 renderProducts();
 updateCart();
 </script>
+
 </body>
 </html>
