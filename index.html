@@ -41,12 +41,96 @@ nav a:hover {color:#a58b65}
 .header-actions {display:flex;gap:10px}
 .header-btn {padding:12px 15px;border:1px solid #ddd;background:white;font-size:11px}
 
-.hero {
-  min-height:570px;display:flex;align-items:center;
-  background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.1)),
-  url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=1800') center/cover;
-  color:white;padding:7%
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: min(85vh, 850px);
+  min-height: 450px;
+  background: #050505;
+  overflow: hidden;
 }
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(0,0,0,.55);
+  color: white;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+.slider-arrow:hover {
+  background: #D8C3A5;
+  color: #111;
+}
+
+.slider-arrow.prev { left: 20px; }
+.slider-arrow.next { right: 20px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 6;
+}
+
+.slider-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background: transparent;
+}
+
+.slider-dot.active {
+  background: #D8C3A5;
+  border-color: #D8C3A5;
+}
+
+@media(max-width:600px) {
+  .hero-slider {
+    height: 75vh;
+    min-height: 420px;
+  }
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  .slider-arrow.prev { left: 10px; }
+  .slider-arrow.next { right: 10px; }
+}
+
 .hero-content {max-width:570px}
 .eyebrow {font-size:11px;letter-spacing:4px;color:var(--beige)}
 .hero h1 {font-family:Georgia,serif;font-weight:400;font-size:clamp(45px,7vw,78px);line-height:1.05;margin:23px 0}
@@ -191,40 +275,37 @@ footer strong {font-family:Georgia,serif;font-size:20px;letter-spacing:3px;color
  </div>
 </header>
 
-<section class="hero" id="home">
- <div class="hero-content">
-  <div class="eyebrow">THE NEW COLLECTION</div>
-  <h1>Fashion That<br>Defines You.</h1>
-  <p>Discover modern styles, premium collections and everyday fashion. Find your style. Make it unique.</p>
-  <a class="primary-btn" href="#shop">SHOP COLLECTION</a>
- </div>
+
+<section class="hero-slider" id="home">
+
+  <div class="hero-slide active">
+    <img src="hero-1.jpeg" alt="UNIQUE FASHION collection 1">
+  </div>
+
+  <div class="hero-slide">
+    <img src="hero-2.jpeg" alt="UNIQUE FASHION collection 2">
+  </div>
+
+  <div class="hero-slide">
+    <img src="hero-3.jpeg" alt="UNIQUE FASHION collection 3">
+  </div>
+
+  <div class="hero-slide">
+    <img src="hero-4.jpeg" alt="UNIQUE FASHION collection 4">
+  </div>
+
+  <button class="slider-arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="slider-arrow next" onclick="changeSlide(1)">&#10095;</button>
+
+  <div class="slider-dots">
+    <button class="slider-dot active" onclick="showSlide(0)" aria-label="Slide 1"></button>
+    <button class="slider-dot" onclick="showSlide(1)" aria-label="Slide 2"></button>
+    <button class="slider-dot" onclick="showSlide(2)" aria-label="Slide 3"></button>
+    <button class="slider-dot" onclick="showSlide(3)" aria-label="Slide 4"></button>
+  </div>
+
 </section>
 
-<section class="section" id="categories">
- <div class="heading">
-  <small>DISCOVER YOUR STYLE</small>
-  <h2>Shop By Category</h2>
- </div>
-
- <div class="categories">
-  <a class="category" href="#shop" onclick="filterProducts('Shirts')">
-   <img src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?w=700" alt="Men's shirts">
-   <span>SHIRTS</span>
-  </a>
-  <a class="category" href="#shop" onclick="filterProducts('T-Shirts')">
-   <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="Men's T-shirts">
-   <span>T-SHIRTS</span>
-  </a>
-  <a class="category" href="#shop" onclick="filterProducts('Jeans & Pants')">
-   <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
-   <span>JEANS & PANTS</span>
-  </a>
-  <a class="category" href="#shop" onclick="filterProducts('Footwear')">
-   <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Footwear">
-   <span>FOOTWEAR</span>
-  </a>
- </div>
-</section>
 
 <section class="section shop-section" id="shop">
  <div class="heading">
@@ -473,7 +554,44 @@ function checkout(e){
 
 renderProducts();
 updateCart();
+  
+let currentSlide = 0;
+let slideTimer;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll(".hero-slide");
+  const dots = document.querySelectorAll(".slider-dot");
+
+  if (slides.length === 0) return;
+
+  currentSlide = (index + slides.length) % slides.length;
+
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === currentSlide);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentSlide);
+  });
+
+  restartSlideTimer();
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlide + direction);
+}
+
+function restartSlideTimer() {
+  clearInterval(slideTimer);
+
+  slideTimer = setInterval(() => {
+    showSlide(currentSlide + 1);
+  }, 4000);
+}
+
+restartSlideTimer();
 </script>
+
 
 </body>
 </html>
