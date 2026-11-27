@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UNIQUE FASHION - Discover premium men's fashion. All India delivery.">
+<title>UNIQUE FASHION | You're Unique, Wear Unique</title>
+
+<style>
+:root {
+  --black:#111111;
+  --white:#ffffff;
+  --beige:#D8C3A5;
+  --cream:#F6F3EE;
+  --grey:#777777;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {font-family:Arial,sans-serif;color:var(--black);background:white}
+button,input,textarea,select {font:inherit}
+button {cursor:pointer}
+a {text-decoration:none;color:inherit}
+
+.announcement {
+  background:var(--black);color:white;text-align:center;
+  padding:10px;font-size:10px;letter-spacing:2px
+}
+header {
+  height:82px;padding:0 6%;display:flex;align-items:center;
+  justify-content:space-between;background:white;
+  position:sticky;top:0;z-index:20;border-bottom:1px solid #eee
+}
+.brand {display:flex;align-items:center;gap:12px}
+.brand img {width:52px;height:52px;object-fit:contain}
+.brand-name {font-family:Georgia,serif;font-size:21px;letter-spacing:2px}
+.tagline {font-size:8px;letter-spacing:2px;color:#777;margin-top:5px}
+nav {display:flex;align-items:center;gap:25px}
+nav a {font-size:11px;letter-spacing:1px}
+nav a:hover {color:#a58b65}
+.header-actions {display:flex;gap:10px}
+.header-btn {padding:12px 15px;border:1px solid #ddd;background:white;font-size:11px}
+
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: min(85vh, 850px);
+  min-height: 450px;
+  background: #050505;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(0,0,0,.55);
+  color: white;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+.slider-arrow:hover {
+  background: #D8C3A5;
+  color: #111;
+}
+
+.slider-arrow.prev { left: 20px; }
+.slider-arrow.next { right: 20px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 6;
+}
+
+.slider-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background: transparent;
+}
+
+.slider-dot.active {
+  background: #D8C3A5;
+  border-color: #D8C3A5;
+}
+
+@media(max-width:600px) {
+  .hero-slider {
+    height: 75vh;
+    min-height: 420px;
+  }
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  .slider-arrow.prev { left: 10px; }
+  .slider-arrow.next { right: 10px; }
+}
+
+.hero-content {max-width:570px}
+.eyebrow {font-size:11px;letter-spacing:4px;color:var(--beige)}
+.hero h1 {font-family:Georgia,serif;font-weight:400;font-size:clamp(45px,7vw,78px);line-height:1.05;margin:23px 0}
+.hero p {font-size:14px;line-height:1.9;color:#eee;max-width:450px}
+.primary-btn {
+  display:inline-block;background:var(--beige);color:#111;
+  padding:16px 27px;margin-top:28px;font-size:11px;
+  font-weight:bold;letter-spacing:2px;border:0
+}
+.primary-btn:hover {background:white}
+
+.section {padding:75px 6%}
+.heading {text-align:center;margin-bottom:38px}
+.heading small {font-size:10px;letter-spacing:3px;color:#a58b65}
+.heading h2 {font-family:Georgia,serif;font-size:37px;font-weight:400;margin-top:12px}
+
+.categories {display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.category {height:260px;position:relative;overflow:hidden;background:#222}
+.category img {width:100%;height:100%;object-fit:cover;opacity:.78;transition:.4s}
+.category:hover img {transform:scale(1.07)}
+.category span {
+ position:absolute;bottom:20px;left:18px;color:white;
+ font-size:14px;letter-spacing:2px;font-weight:bold
+}
+
+.shop-section {background:var(--cream)}
+.filters {display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:35px}
+.filter {background:white;border:1px solid #ddd;padding:11px 18px;font-size:10px;letter-spacing:1px}
+.filter.active,.filter:hover {background:#111;color:white;border-color:#111}
+
+.products {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px}
+.product-card {min-width:0;background:white}
+.product-image {height:290px;background:#eee;overflow:hidden;position:relative}
+.product-image img {width:100%;height:100%;object-fit:cover;transition:.4s}
+.product-card:hover img {transform:scale(1.04)}
+.product-info {padding:16px}
+.product-category {font-size:9px;color:#999;letter-spacing:2px}
+.product-name {font-size:14px;margin:10px 0}
+.product-price {font-weight:bold;font-size:15px}
+.product-controls {display:flex;gap:7px;margin-top:14px}
+.product-controls select {width:42%;min-width:0;padding:10px;border:1px solid #ddd;background:white;font-size:11px}
+.add-btn {flex:1;background:#111;color:white;border:0;font-size:10px;letter-spacing:1px}
+.add-btn:hover {background:#a58b65}
+
+.promo {
+ background:#111;color:white;text-align:center;padding:65px 20px
+}
+.promo h2 {font-family:Georgia,serif;font-size:35px;font-weight:400;margin:15px 0}
+.promo p {color:#ccc;font-size:13px;line-height:1.8}
+
+.benefits {
+ background:var(--cream);display:grid;grid-template-columns:repeat(3,1fr);
+ gap:25px;padding:45px 6%;text-align:center
+}
+.benefits h3 {font-family:Georgia,serif;font-weight:400;font-size:21px;margin-bottom:10px}
+.benefits p {font-size:11px;color:#777;line-height:1.7}
+
+.about {text-align:center}
+.about p {max-width:700px;margin:auto;color:#666;font-size:13px;line-height:2}
+
+.contact {background:var(--cream);text-align:center}
+.contact p {font-size:13px;line-height:2;color:#555}
+
+footer {background:#111;color:#ddd;text-align:center;padding:40px 15px;line-height:2;font-size:11px}
+footer strong {font-family:Georgia,serif;font-size:20px;letter-spacing:3px;color:var(--beige)}
+
+.overlay {display:none;position:fixed;inset:0;background:#0008;z-index:50}
+.overlay.show {display:block}
+.drawer {
+ position:absolute;right:0;top:0;width:min(450px,100%);
+ height:100%;background:white;padding:25px;overflow-y:auto
+}
+.drawer-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.drawer-head h2 {font-family:Georgia,serif;font-weight:400}
+.close {background:none;border:0;font-size:27px}
+.cart-item {display:flex;justify-content:space-between;gap:10px;padding:15px 0;border-bottom:1px solid #eee;font-size:12px}
+.remove {border:0;background:none;color:#a33;font-size:11px}
+.cart-total {display:flex;justify-content:space-between;padding:20px 0;font-weight:bold}
+.checkout-form {display:grid;gap:12px;margin-top:12px}
+.checkout-form input,.checkout-form textarea {
+ padding:13px;width:100%;border:1px solid #ddd;font-size:12px
+}
+.checkout-btn {background:#111;color:white;border:0;padding:15px;font-size:11px;letter-spacing:1px}
+.empty {padding:25px 0;color:#777;font-size:13px}
+
+@media(max-width:900px) {
+ .products {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .categories {grid-template-columns:repeat(2,1fr)}
+ nav {gap:12px}
+}
+@media(max-width:600px) {
+ header {height:68px;padding:0 4%}
+ .brand img {width:40px;height:40px}
+ .brand-name {font-size:15px}
+ .tagline {font-size:7px}
+ nav {display:none}
+ .header-btn {padding:10px;font-size:10px}
+ .hero {min-height:470px;padding:8% 6%;background-position:60% center}
+ .hero h1 {font-size:48px}
+ .section {padding:52px 5%}
+ .heading h2 {font-size:30px}
+ .category {height:190px}
+ .product-image {height:220px}
+ .product-info {padding:11px}
+ .product-name {font-size:12px}
+ .product-controls {flex-direction:column}
+ .product-controls select {width:100%}
+ .add-btn {padding:12px}
+ .benefits {grid-template-columns:1fr;gap:28px}
+}
+
+
+/* Track Pants combo colour and size selector */
+.track-combo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.track-combo-option{border:1px solid #ddd;border-radius:8px;padding:7px;min-width:0;background:#fff}
+.track-combo-option:has(input:checked){border:2px solid #a58b65;background:#fbf7f1}
+.track-combo-option img{width:100%;height:125px;object-fit:cover;display:block;border-radius:5px}
+.track-combo-option label{display:flex;align-items:center;gap:5px;font-size:12px;margin:7px 0}
+.track-combo-option select{width:100%;padding:7px 4px;border:1px solid #ddd;border-radius:5px;background:#fff;font-size:12px}
+.track-combo-help{font-size:12px;color:#666;line-height:1.6;margin:8px 0}
+.track-combo-add{width:100%;padding:13px;background:#111;color:#fff;border:0;border-radius:5px;font-weight:700;cursor:pointer}
+@media(max-width:600px){.track-combo-grid{gap:6px}.track-combo-option{padding:4px}.track-combo-option img{height:88px}.track-combo-option label{font-size:10px}}
+
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+ PREMIUM MEN'S FASHION &nbsp; | &nbsp; ALL INDIA DELIVERY
+</div>
+
+<header>
+ <a href="#home" class="brand">
+  <img src="unique-logo.png" alt="UNIQUE FASHION Logo"
+       onerror="this.style.display='none'">
+  <div>
+   <div class="brand-name">UNIQUE FASHION</div>
+   <div class="tagline">YOU'RE UNIQUE, WEAR UNIQUE</div>
+  </div>
+ </a>
+
+ <nav>
+  <a href="#home">HOME</a>
+  <a href="#categories">CATEGORIES</a>
+  <a href="#shop">SHOP</a>
+  <a href="#about">ABOUT</a>
+  <a href="#contact">CONTACT</a>
+ </nav>
+
+ <div class="header-actions">
+  <button class="header-btn" onclick="openCart()">
+   BAG (<span id="cart-count">0</span>)
+  </button>
+ </div>
+</header>
+
+
+<section class="hero-slider" id="home">
+
+  <div class="hero-slide active">
+    <img src="https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/hero-1.jpeg.jpeg" alt="UNIQUE FASHION collection 1">
+  </div>
+
+  <div class="hero-slide">
+    <img src="https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/hero-2.jpeg.jpeg" alt="UNIQUE FASHION collection 2">
+  </div>
+
+  <div class="hero-slide">
+    <img src="https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/hero-3.jpeg.jpeg" alt="UNIQUE FASHION collection 3">
+  </div>
+
+  <div class="hero-slide">
+    <img src="https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/hero-4.jpeg.jpeg" alt="UNIQUE FASHION collection 4">
+  </div>
+
+  <button class="slider-arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="slider-arrow next" onclick="changeSlide(1)">&#10095;</button>
+
+  <div class="slider-dots">
+    <button class="slider-dot active" onclick="showSlide(0)" aria-label="Slide 1"></button>
+    <button class="slider-dot" onclick="showSlide(1)" aria-label="Slide 2"></button>
+    <button class="slider-dot" onclick="showSlide(2)" aria-label="Slide 3"></button>
+    <button class="slider-dot" onclick="showSlide(3)" aria-label="Slide 4"></button>
+  </div>
+
+</section>
+
+
+<section class="section shop-section" id="shop">
+ <div class="heading">
+  <small>SELECTED FOR YOU</small>
+  <h2>Our Collection</h2>
+ </div>
+
+ <div class="filters">
+  <button class="filter active" onclick="filterProducts('All',this)">ALL</button>
+  <button class="filter" onclick="filterProducts('Shirts',this)">SHIRTS</button>
+  <button class="filter" onclick="filterProducts('T-Shirts',this)">T-SHIRTS</button>
+  <button class="filter" onclick="filterProducts('Jeans & Pants',this)">JEANS & PANTS</button>
+  <button class="filter" onclick="filterProducts('Footwear',this)">FOOTWEAR</button>
+  <button class="filter" onclick="filterProducts('Track Pants',this)">TRACK PANTS</button>
+ </div>
+
+ <div class="products" id="product-list"></div>
+</section>
+
+<section class="promo">
+ <div class="eyebrow">YOUR STYLE. YOUR IDENTITY.</div>
+ <h2>You're Unique, Wear Unique.</h2>
+ <p>Explore the latest fashion collection at UNIQUE FASHION.<br>
+ Quality styles for everyday confidence.</p>
+ <a href="#shop" class="primary-btn">EXPLORE NOW</a>
+</section>
+
+<section class="benefits">
+ <div>
+  <h3>Premium Fashion</h3>
+  <p>Modern styles for everyday wear.</p>
+ </div>
+ <div>
+  <h3>All India Delivery</h3>
+  <p>We deliver across India.</p>
+ </div>
+ <div>
+  <h3>Easy Ordering</h3>
+  <p>Order directly through WhatsApp.</p>
+ </div>
+</section>
+
+<section class="section about" id="about">
+ <div class="heading">
+  <small>OUR STORY</small>
+  <h2>About UNIQUE FASHION</h2>
+ </div>
+ <p>
+  UNIQUE FASHION brings together modern fashion, everyday comfort
+  and personal style. Discover our collection of shirts, T-shirts,
+  jeans, pants and footwear. Our goal is to make your everyday style unique.
+ </p>
+</section>
+
+<section class="section contact" id="contact">
+ <div class="heading">
+  <small>WE ARE HERE FOR YOU</small>
+  <h2>Visit Our Store</h2>
+ </div>
+ <p>
+  UNIQUE FASHION<br>
+  Ulloor, Thiruvananthapuram, Kerala<br>
+  Enquiry: +91 6235 355 544<br>
+  All India Delivery Available
+ </p>
+ <a class="primary-btn" href="https://wa.me/916235355544">
+  CONTACT ON WHATSAPP
+ </a>
+</section>
+
+<footer>
+ <strong>UNIQUE FASHION</strong><br>
+ YOU'RE UNIQUE, WEAR UNIQUE<br>
+ Ulloor, Thiruvananthapuram, Kerala<br>
+ © 2026 UNIQUE FASHION. All Rights Reserved.
+</footer>
+
+<div class="overlay" id="cart-overlay" onclick="outsideClose(event)">
+ <div class="drawer">
+  <div class="drawer-head">
+   <h2>Your Shopping Bag</h2>
+   <button class="close" onclick="closeCart()">×</button>
+  </div>
+
+  <div id="cart-items"></div>
+
+  <div class="cart-total">
+   <span>Total</span>
+   <span id="cart-total">₹0</span>
+  </div>
+
+  <p style="font-size:11px;color:#777;line-height:1.7">
+   No online payment. Your order will be sent to our WhatsApp for confirmation.
+  </p>
+
+  <form class="checkout-form" onsubmit="checkout(event)">
+   <input id="customer-name" placeholder="Full name" required>
+   <input id="customer-phone" placeholder="Mobile number" type="tel" required>
+   <textarea id="customer-address" placeholder="Complete delivery address" rows="3" required></textarea>
+   <button type="submit" class="checkout-btn">PLACE ORDER ON WHATSAPP</button>
+  </form>
+ </div>
+</div>
+
+<script>
+// SAMPLE PRODUCTS: Replace these with your real products and prices.
+
+const products = [
+ 
+ {id:7,name:"Men's Basic T-Shirt",category:"T-Shirts",price:199,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/unique_basic_tshirt_product.jpg",sizes:["S","M","L","XL","XXL"]},
+ {id:8,name:"Crocs - Neon Green",category:"Footwear",price:949,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/crocs-neon-green.jpg.jpg",sizes:["6","7","8","9","10"]},
+ {id:9,name:"Crocs - Black",category:"Footwear",price:949,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/crocs-black.jpg.jpg",sizes:["6","7","8","9","10"]},
+ {id:10,name:"Crocs - Blue",category:"Footwear",price:949,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/crocs-blue.jpg.jpg",sizes:["6","7","8","9","10"]},
+ {id:11,name:"Crocs - Beige",category:"Footwear",price:949,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/crocs-beige.jpg.jpg",sizes:["6","7","8","9","10"]},
+ {id:12,name:"Premium Linen Shirt - Brown",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-brown.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
+ {id:13,name:"Premium Linen Shirt - Purple",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-purple.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
+ {id:14,name:"Premium Linen Shirt - Pink",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-pink.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
+ {id:15,name:"4 Track Pants Combo Offer - Pick Any 4",category:"Track Pants",price:999,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-grey.jpg",sizes:["S","M","L","XL","XXL","XXXL"],combo:true,colors:[
+  {name:"Grey",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-grey.jpg"},
+  {name:"Pink",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-pink.jpg"},
+  {name:"Teal",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-teal.jpg"},
+  {name:"Brown",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-brown.jpg"},
+  {name:"Beige",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-beige.jpg"},
+  {name:"Olive",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-olive.jpg"}
+]},
+];
+
+let cart=[];
+let activeFilter="All";
+
+function renderProducts(){
+ const list=document.getElementById("product-list");
+ const filtered=activeFilter==="All" ? products : products.filter(p=>p.category===activeFilter);
+
+ list.innerHTML=filtered.map(p=>{
+  if(p.combo){
+   return `
+    <article class="product-card">
+     <div class="product-image">
+      <img src="${p.image}" alt="${p.name}" loading="lazy">
+     </div>
+     <div class="product-info">
+      <div class="product-category">TRACK PANTS COMBO OFFER</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">PICK ANY 4 - ₹${p.price.toLocaleString("en-IN")}</div>
+      <p class="track-combo-help">Choose any 4 colours from the 6 options below. Select a size for each pant. Sizes: S to XXXL.</p>
+      <div class="track-combo-grid">
+       ${p.colors.map((c,index)=>`
+        <div class="track-combo-option">
+         <img src="${c.image}" alt="${c.name} Track Pants" loading="lazy">
+         <label><input class="track-color-check" type="checkbox" value="${c.name}" data-index="${index}"> ${c.name}</label>
+         <select class="track-color-size" data-index="${index}" aria-label="${c.name} size">
+          ${p.sizes.map(size=>`<option value="${size}">${size}</option>`).join("")}
+         </select>
+        </div>`).join("")}
+      </div>
+      <div class="track-combo-help" id="track-combo-count">0 of 4 selected</div>
+      <button class="track-combo-add" onclick="addTrackPantCombo(${p.id})">ADD 4 PANTS TO BAG - ₹999</button>
+     </div>
+    </article>`;
+  }
+  return `
+   <article class="product-card">
+    <div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
+    <div class="product-info">
+     <div class="product-category">${p.category.toUpperCase()}</div>
+     <div class="product-name">${p.name}</div>
+     <div class="product-price">₹${p.price.toLocaleString("en-IN")}</div>
+     <div class="product-controls">
+      <select id="size-${p.id}" aria-label="Select size">
+       ${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join("")}
+      </select>
+      <button class="add-btn" onclick="addToCart(${p.id})">ADD TO BAG</button>
+     </div>
+    </div>
+   </article>`;
+ }).join("");
+
+ document.querySelectorAll(".track-color-check").forEach(check=>{
+  check.addEventListener("change",()=>{
+   const selected=document.querySelectorAll(".track-color-check:checked").length;
+   document.getElementById("track-combo-count").textContent=selected+" of 4 selected";
+  });
+ });
+}
+
+function filterProducts(category,button){
+ activeFilter=category;
+ document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+
+ if(button){
+  button.classList.add("active");
+ } else {
+  const match=[...document.querySelectorAll(".filter")]
+   .find(b=>b.textContent.trim().toLowerCase()===category.toLowerCase());
+  if(match) match.classList.add("active");
+ }
+
+ renderProducts();
+}
+
+function addToCart(id){
+ const product=products.find(p=>p.id===id);
+ const size=document.getElementById("size-"+id).value;
+ const existing=cart.find(i=>i.id===id&&i.size===size);
+
+ if(existing) existing.qty++;
+ else cart.push({...product,size,qty:1});
+
+ updateCart();
+ openCart();
+}
+
+function addTrackPantCombo(id){
+ const product=products.find(p=>p.id===id);
+ const checks=[...document.querySelectorAll(".track-color-check:checked")];
+ if(checks.length!==4){
+  alert("Please choose exactly 4 Track Pants colours.");
+  return;
+ }
+ const selected=checks.map(check=>{
+  const index=Number(check.dataset.index);
+  const color=product.colors[index];
+  const size=document.querySelector('.track-color-size[data-index="'+index+'"]').value;
+  return {color:color.name,size};
+ });
+ const selectionKey=selected.map(item=>item.color+":"+item.size).join(", ");
+ const existing=cart.find(item=>item.id===id&&item.selectionKey===selectionKey);
+ if(existing) existing.qty++;
+ else cart.push({id:product.id,name:"4 Track Pants Combo",price:999,size:selectionKey,selectionKey,qty:1,comboItems:selected});
+ updateCart();
+ openCart();
+}
+
+
+function updateCart(){
+ document.getElementById("cart-count").textContent=
+  cart.reduce((s,i)=>s+i.qty*(i.comboItems?4:1),0);
+
+ const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+ document.getElementById("cart-total").textContent=
+  "₹"+total.toLocaleString("en-IN");
+
+ const container=document.getElementById("cart-items");
+
+ if(!cart.length){
+  container.innerHTML='<div class="empty">Your shopping bag is empty.</div>';
+  return;
+ }
+
+ container.innerHTML=cart.map(i=>`
+  <div class="cart-item">
+   <div>
+    <strong>${i.name}</strong><br>
+    ${i.comboItems
+      ? "Selected: "+i.comboItems.map(item=>item.color+" (Size "+item.size+")").join(", ")+"<br>4 pants per combo · Quantity: "+i.qty+"<br>"
+      : "Size: "+i.size+" · Quantity: "+i.qty+"<br>"}
+    ₹${(i.price*i.qty).toLocaleString("en-IN")}
+   </div>
+   <button class="remove" onclick="removeItem(${i.id},'${i.size.replace(/'/g, "\\'")}')">REMOVE</button>
+  </div>
+ `).join("");
+}
+
+function removeItem(id,size){
+ cart=cart.filter(i=>!(i.id===id&&i.size===size));
+ updateCart();
+}
+
+function openCart(){
+ document.getElementById("cart-overlay").classList.add("show");
+ updateCart();
+}
+
+function closeCart(){
+ document.getElementById("cart-overlay").classList.remove("show");
+}
+
+function outsideClose(e){
+ if(e.target.id==="cart-overlay") closeCart();
+}
+
+function checkout(e){
+ e.preventDefault();
+
+ if(!cart.length){
+  alert("Your shopping bag is empty.");
+  return;
+ }
+
+ const name=document.getElementById("customer-name").value.trim();
+ const phone=document.getElementById("customer-phone").value.trim();
+ const address=document.getElementById("customer-address").value.trim();
+
+ const items=cart.map(i=>
+  i.comboItems
+   ? `${i.name} | ${i.comboItems.map(item=>item.color+" - Size "+item.size).join("; ")} | ${i.qty} combo(s) of 4 | ₹${i.price*i.qty}`
+   : `${i.name} | Size: ${i.size} | Qty: ${i.qty} | ₹${i.price*i.qty}`
+ ).join("\\n");
+
+ const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+
+ const message=
+ `NEW ORDER - UNIQUE FASHION\n\n`+
+ `Customer: ${name}\nPhone: ${phone}\nAddress: ${address}\n\n`+
+ `ORDER DETAILS:\n${items}\n\nTotal: ₹${total}\n\n`+
+ `Please confirm availability and delivery details.`;
+
+ window.open(
+  "https://wa.me/916235355544?text="+encodeURIComponent(message),
+  "_blank"
+ );
+}
+
+renderProducts();
+updateCart();
+  
+let currentSlide = 0;
+let slideTimer;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll(".hero-slide");
+  const dots = document.querySelectorAll(".slider-dot");
+
+  if (slides.length === 0) return;
+
+  currentSlide = (index + slides.length) % slides.length;
+
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === currentSlide);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentSlide);
+  });
+
+  restartSlideTimer();
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlide + direction);
+}
+
+function restartSlideTimer() {
+  clearInterval(slideTimer);
+
+  slideTimer = setInterval(() => {
+    showSlide(currentSlide + 1);
+  }, 4000);
+}
+
+restartSlideTimer();
+</script>
+
+
+</body>
+</html>
