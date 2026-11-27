@@ -174,6 +174,15 @@ nav a:hover {color:#a58b65}
 .product-controls select {width:42%;min-width:0;padding:10px;border:1px solid #ddd;background:white;font-size:11px}
 .add-btn {flex:1;background:#111;color:white;border:0;font-size:10px;letter-spacing:1px}
 .add-btn:hover {background:#a58b65}
+.track-combo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
+.track-combo-option{border:1px solid #ddd;padding:6px;min-width:0;background:#fff}
+.track-combo-option:has(input:checked){border:2px solid #a58b65;background:#fbf7f1}
+.track-combo-option img{width:100%;height:105px;object-fit:cover;display:block;background:#eee}
+.track-combo-option label{display:flex;align-items:center;gap:4px;font-size:10px;margin:6px 0}
+.track-combo-option select{width:100%;padding:6px 3px;border:1px solid #ddd;background:white;font-size:10px}
+.track-combo-help{font-size:11px;color:#666;line-height:1.6;margin-top:8px}
+.track-combo-add{width:100%;min-height:40px;margin-top:10px;background:#111;color:white;border:0;font-size:11px;letter-spacing:1px}
+@media(max-width:600px){.track-combo-grid{gap:6px}.track-combo-option{padding:4px}.track-combo-option img{height:85px}}
 
 .promo {
  background:#111;color:white;text-align:center;padding:65px 20px
@@ -319,6 +328,7 @@ footer strong {font-family:Georgia,serif;font-size:20px;letter-spacing:3px;color
   <button class="filter" onclick="filterProducts('T-Shirts',this)">T-SHIRTS</button>
   <button class="filter" onclick="filterProducts('Jeans & Pants',this)">JEANS & PANTS</button>
   <button class="filter" onclick="filterProducts('Footwear',this)">FOOTWEAR</button>
+  <button class="filter" onclick="filterProducts('Track Pants',this)">TRACK PANTS</button>
  </div>
 
  <div class="products" id="product-list"></div>
@@ -422,7 +432,14 @@ const products = [
  {id:12,name:"Premium Linen Shirt - Brown",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-brown.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
  {id:13,name:"Premium Linen Shirt - Purple",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-purple.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
  {id:14,name:"Premium Linen Shirt - Pink",category:"Shirts",price:660,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/linen-pink.jpg.jpg",sizes:["S","M","L","XL","XXL"]},
- {id:15,name:"4 Track Pants Combo Offer - Pick Any 4",category:"Track Pants",price:999,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-grey.jpg",sizes:["S","M","L","XL","XXL","XXXL"]},
+ {id:15,name:"4 Track Pants Combo Offer - Pick Any 4",category:"Track Pants",price:999,image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-grey.jpg",sizes:["S","M","L","XL","XXL","XXXL"],combo:true,colors:[
+{name:"Grey",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-grey.jpg"},
+{name:"Pink",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-pink.jpg"},
+{name:"Teal",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-teal.jpg"},
+{name:"Brown",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-brown.jpg"},
+{name:"Beige",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-beige.jpg"},
+{name:"Olive",image:"https://raw.githubusercontent.com/uniquefashion-web/unique-fashion/main/track-pant-olive.jpg"}
+]},
 ];
 
 let cart=[];
@@ -430,28 +447,45 @@ let activeFilter="All";
 
 function renderProducts(){
  const list=document.getElementById("product-list");
- const filtered=activeFilter==="All"
-  ? products
-  : products.filter(p=>p.category===activeFilter);
-
- list.innerHTML=filtered.map(p=>`
-  <article class="product-card">
-   <div class="product-image">
-    <img src="${p.image}" alt="${p.name}" loading="lazy">
-   </div>
+ const filtered=activeFilter==="All" ? products : products.filter(p=>p.category===activeFilter);
+ list.innerHTML=filtered.map(p=>{
+  if(p.combo){
+   return `<article class="product-card"><div class="product-info">
+    <div class="product-category">TRACK PANTS COMBO</div>
+    <div class="product-name">${p.name}</div>
+    <div class="product-price">Pick Any 4 - ₹${p.price.toLocaleString("en-IN")}</div>
+    <div class="track-combo-help">Choose any 4 colours. Select a size for each pant. Sizes: S to XXXL.</div>
+    <div class="track-combo-grid">${p.colors.map((c,index)=>`
+     <div class="track-combo-option">
+      <img src="${c.image}" alt="${c.name} Track Pants" loading="lazy">
+      <label><input class="track-color-check" type="checkbox" value="${c.name}" data-index="${index}"> ${c.name}</label>
+      <select class="track-color-size" data-index="${index}" aria-label="${c.name} size">
+       ${p.sizes.map(size=>`<option value="${size}">${size}</option>`).join("")}
+      </select>
+     </div>`).join("")}
+    </div>
+    <div class="track-combo-help" id="track-combo-count">0 of 4 selected</div>
+    <button class="track-combo-add" onclick="addTrackPantCombo(${p.id})">ADD 4 PANTS TO BAG - ₹999</button>
+   </div></article>`;
+  }
+  return `<article class="product-card">
+   <div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
    <div class="product-info">
     <div class="product-category">${p.category.toUpperCase()}</div>
     <div class="product-name">${p.name}</div>
     <div class="product-price">₹${p.price.toLocaleString("en-IN")}</div>
     <div class="product-controls">
-     <select id="size-${p.id}" aria-label="Select size">
-      ${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join("")}
-     </select>
+     <select id="size-${p.id}" aria-label="Select size">${p.sizes.map(size=>`<option value="${size}">${size}</option>`).join("")}</select>
      <button class="add-btn" onclick="addToCart(${p.id})">ADD TO BAG</button>
     </div>
-   </div>
-  </article>
- `).join("");
+   </div></article>`;
+ }).join("");
+ document.querySelectorAll(".track-color-check").forEach(check=>{
+  check.addEventListener("change",()=>{
+   const selected=document.querySelectorAll(".track-color-check:checked").length;
+   document.getElementById("track-combo-count").textContent=selected+" of 4 selected";
+  });
+ });
 }
 
 function filterProducts(category,button){
@@ -480,10 +514,25 @@ function addToCart(id){
  updateCart();
  openCart();
 }
+function addTrackPantCombo(id){
+ const product=products.find(p=>p.id===id);
+ const checks=[...document.querySelectorAll(".track-color-check:checked")];
+ if(checks.length!==4){alert("Please select exactly 4 Track Pants colours.");return;}
+ const selected=checks.map(check=>{
+  const index=Number(check.dataset.index), color=product.colors[index];
+  const size=document.querySelector('.track-color-size[data-index="'+index+'"]').value;
+  return {color:color.name,size};
+ });
+ const sizeKey=selected.map(item=>item.color+":"+item.size).join(", ");
+ const existing=cart.find(item=>item.id===id&&item.size===sizeKey);
+ if(existing) existing.qty++;
+ else cart.push({id:product.id,name:"4 Track Pants Combo",price:999,size:sizeKey,qty:1,comboItems:selected});
+ updateCart(); openCart();
+}
 
 function updateCart(){
  document.getElementById("cart-count").textContent=
-  cart.reduce((s,i)=>s+i.qty,0);
+  cart.reduce((s,i)=>s+i.qty*(i.comboItems?4:1),0);
 
  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
  document.getElementById("cart-total").textContent=
@@ -497,13 +546,12 @@ function updateCart(){
  }
 
  container.innerHTML=cart.map(i=>`
-  <div class="cart-item">
-   <div>
-    <strong>${i.name}</strong><br>
-    Size: ${i.size} · Quantity: ${i.qty}<br>
-    ₹${(i.price*i.qty).toLocaleString("en-IN")}
-   </div>
-   <button class="remove" onclick="removeItem(${i.id},'${i.size}')">REMOVE</button>
+  <div class="cart-item"><div>
+   <strong>${i.name}</strong><br>
+   ${i.comboItems ? "Selected: "+i.comboItems.map(item=>item.color+" ("+item.size+")").join(", ")+"<br>4 pants per combo · Combos: "+i.qty+"<br>" : "Size: "+i.size+" · Quantity: "+i.qty+"<br>"}
+   ₹${(i.price*i.qty).toLocaleString("en-IN")}
+  </div>
+  <button class="remove" onclick="removeItem(${i.id},'${i.size.replace(/'/g, "\'")}')">REMOVE</button>
   </div>
  `).join("");
 }
@@ -539,7 +587,9 @@ function checkout(e){
  const address=document.getElementById("customer-address").value.trim();
 
  const items=cart.map(i=>
-  `${i.name} | Size: ${i.size} | Qty: ${i.qty} | ₹${i.price*i.qty}`
+  i.comboItems
+   ? `${i.name} | ${i.comboItems.map(item=>item.color+" - Size "+item.size).join("; ")} | ${i.qty} combo(s) of 4 | ₹${i.price*i.qty}`
+   : `${i.name} | Size: ${i.size} | Qty: ${i.qty} | ₹${i.price*i.qty}`
  ).join("\n");
 
  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
